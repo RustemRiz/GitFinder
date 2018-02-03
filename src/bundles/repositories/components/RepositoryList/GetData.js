@@ -1,12 +1,15 @@
-const url = "https://api.github.com/users/RustemRiz/repos";
-export function	getData(q,callback)
+export function	getData(login,callback)
 {
-	$.getJSON(url,(data) =>{
-		console.log(data);
-		callback.call(data);
-
-	});
+	const url = 'https://api.github.com/users/' + login + '/repos';
+	$.getJSON(url,(data) =>	callback.call(this,data));
+	console.log('main function');
 
 }
 
 
+// { condition && <Component />}
+// {
+//  condition
+//  ? <Component />
+//  : <NoComponent />
+// }
