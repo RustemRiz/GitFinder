@@ -1,34 +1,45 @@
 import React, {Component} from 'react';
 import {RepositoryListContainer} from '../../../repositories/components/RepositoryList';
+import { getData } from './GetData';
 
 export default class Finder extends Component{
-	constructor(){
-		super();
-		this.state = {login:'RustemRiz'};
-		this.self = this;
+	constructor(props){
+		super(props);
+		this.state = {login:'', data: []};
 	}
-	btnFindClick(e){
-		console.log('btn Clicked');
-		this.setState({login:'imanakhov'});
-		console.log(this);
-		render();
+	
+
+	setData(login){
+		var self = this;
+		getData(login, function(data){
+			console.log('callback argument : ' + data);
+			if(data){
+				self.setState({login, data:data});
+			}
+			else{
+				alert("User not found");
+			}
+
+		});	
+		return;
+	}
 
 
-	}
+
 	render(){
+		console.log('render Finder');
 		return (
-				<div className="row finder" >
-					<button onClick={()=> {this.setState({login:'imanakhov'});console.log(this)}}>Find</button>
-					<div className="col-4">
-						<input type='text' placeholder='Login'/>
-						<button onClick={this.btnFindClick}>Find</button>
-					</div>
-					<div className="col-6">
-						<RepositoryListContainer login={this.state.login}/>
-					</div>
-				</div>
+			<div>
+				<button onClick={() => {
+					this.setData(this.props.login);
+					console.log(this.state.login);
+					console.log(this.props.login);
+				}}>
+					Find
+				</button>
+				<RepositoryListContainer login={this.state.login} data={this.state.data}/>
+			</div>
 			);
 	}
 }
-
 
