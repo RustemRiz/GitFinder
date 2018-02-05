@@ -7,10 +7,10 @@ export default class RepositoryList extends Component{
 		console.log(repositories);
 		return(
 			<div>
-				<table>
-					<thead>
+				<table className='table table-striped '>
+					<thead className='thead-dark'>
 						<tr>
-							<th>Id</th>
+							<th >Id</th>
 							<th>Name</th>
 							<th>Description</th>
 						</tr>
